@@ -1,6 +1,8 @@
+
 import streamlit as st
 import pickle
 import numpy as np
+
 
 def load_model():
     with open('saved_steps.pkl', 'rb') as file:
@@ -44,12 +46,11 @@ def show_predict_page():
 
     country = st.selectbox("Country", countries)
     education = st.selectbox("Education Level", education)
-
-    expericence = st.slider("Years of Experience", 0, 50, 3)
+    experience = st.slider("Years of Experience", 0, 50, 3)
 
     ok = st.button("Calculate Salary")
     if ok:
-        X = np.array([[country, education, expericence ]])
+        X = np.array([[country, education, experience ]])
         X[:, 0] = le_country.transform(X[:,0])
         X[:, 1] = le_education.transform(X[:,1])
         X = X.astype(float)
